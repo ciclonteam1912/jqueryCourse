@@ -1,12 +1,9 @@
 $(function() {
   // jQuery goes here...
 
-  // $(".blue-box").slideUp(2000);//This will make the element disappear and will set the display to none.
-  // $(".blue-box").slideDown(2000);
-
-  $(".blue-box").slideToggle(2000);//This is going to slide up the element if it's currently shown and it's gonna slide down 
-  // the element if it's currently hidde.
-
-  $("p").hide();
-  $("p").slideDown(1000);
+  //Moving elements
+  $(".blue-box").animate({
+  	"margin-left": "+=200px" //+= this will just increase the margin you have by 200px
+  }, 1000, "linear");// here over 1000 milliseconds jQuery go ahead and add one pixel every 5 milliseconds in linear scale.
+  //If you don't pass anything as a third parameter by default is usually 'swing'.
 });
