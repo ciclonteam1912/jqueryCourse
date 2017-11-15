@@ -1,10 +1,21 @@
 $(function() {
   // jQuery goes here...
 
-  //Delaying and Chaining Animations
-  $(".red-box").fadeTo(1000, 0.2);
-  $(".green-box").delay(1000).fadeTo(1000, 0.5);//It will wait 1000 millisecond for execute, and also in this line we already used chaining.
-  //Chaining means that when you call a function (delay) on your element and then right after this you call another function.
-  $(".blue-box").delay(2000).fadeTo(1000, 0.8).fadeOut().delay(500).fadeIn();
+  /*Timing Animations Using Callback Functions
+    $(".red-box").fadeTo(1000, 0 ,function(){
+  	alert("This is the callback: Animation finished");// Once the animation is finished, the callback function is executed. So you can also
+  	// use this to time your animations.
 
+  	you can recognize callback functions from the fact that they're passed into another function as a callback 
+  	(meaning they're executed after that function finishes).
+  });*/
+
+  $(".red-box").fadeTo(1000, 0 ,function(){
+  	$(".green-box").fadeTo(1000, 0, function(){
+  		$(".blue-box").fadeTo(1000, 0);
+  	});
+  });
+
+  //$(".red-box").fadeOut(1000).delay(500).fadeIn(1000); //This only works with delays and no with callback functions, because they're only
+  //called once the animation has really finished.
 });
