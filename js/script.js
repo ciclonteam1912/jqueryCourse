@@ -1,22 +1,10 @@
 $(function() {
   // jQuery goes here...
 
-  //Moving elements
-  /* $(".blue-box").animate({
-   	"opacity": "0"	
-  }, 1000); //This would be the same to fadeTo(1000, 0)*/
+  //Delaying and Chaining Animations
+  $(".red-box").fadeTo(1000, 0.2);
+  $(".green-box").delay(1000).fadeTo(1000, 0.5);//It will wait 1000 millisecond for execute, and also in this line we already used chaining.
+  //Chaining means that when you call a function (delay) on your element and then right after this you call another function.
+  $(".blue-box").delay(2000).fadeTo(1000, 0.8).fadeOut().delay(500).fadeIn();
 
-  //But with custom animations you're free to add any other properties as well
-  $(".blue-box").animate({
-  	"margin-left": "200px",
-  	"opacity": "0",
-  	"height": "50px",
-  	"width": "50px",
-  	"margin-top": "25px"
-  }, 1000);
-
-  $("p").animate({
-  	fontSize: "20px"
-  }, 1000); //This custom animations doesn't work with colors, because jQuery it's not clever enough to transition between the 
-  //color correctly
 });
