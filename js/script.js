@@ -1,29 +1,31 @@
 $(function() {
   // jQuery goes here...
 
-/*Replacing elements and content */
-// $("li").replaceWith("<li>Replaced</li>");
+  /*Removing elements and content */
+  // $("li").remove();
 
-/*You can pass also either a function or another element that you have on the page*/
-  // $("li").replaceWith(function(){
-  //   return "<li>Replaced with function</li>";
-  // });
+  /*Mini-challenge. Remove all the direct children of the form element that are not an input of type text, textarea and br tags*/
+  // $("form").children().not("input:text, textarea, br").remove();
 
-/*In here the existing element that we have now used to replace the paragraph is actually moved to a new position.
-So it's not cloned by jQuery. Is also consistent with how append(), prepend(), before() and after() functions behave.*/
-  var firstListItem = $("li:first");
-  // $("p:first").replaceWith(firstListItem);
+  /*In contrat to the remove funtion it's going to remember all the data and event handlers that are associated with the removed elements.
+  There's a function called detach() which just detaches an element from the page and you can store that element into a variable to be 
+  able then later append it to a DOM element*/
+  // var detachedListItem = $("li").detach();
+  // $("#content").append(detachedListItem);
 
-  /*But when you have a multiple elements that need to be replaced, the jQuery is going to go ahead for the second element and
-  it's going to clone this element.
+  /*You can also do the same thing with remove, but the difference is when you were to re append or re-insert an element into the page,
+  and that element has some kind of click listener or any other kind of event, jQuery it's not going to remember any of that. So all the
+  event handlers and all the associated data are lost.
 
-  So to replace the first paragraph jQuery it's just going to move the list item to the new position, but for the second one
-  it will actually clone the list item because it just cannot move it again.*/
-  $("p").replaceWith(firstListItem);
+  So if you want to insert a removed element back into the page, you will probably want to use detach() instead because when you detached it
+  jQuery it's not gonna forget all the event handlers that are associated with the element*/
 
-  /*Mini challenge*/
-  // $(".red-box, .blue-box").replaceWith("<div class='green-box'>More Green</div>");
+  /*With remove() and detach() also remove all the child elements of the selected element*/
 
-  /*This is like appendTo() and prependTo()*/
-  $("<div class='green-box'>More Green</div>").replaceAll(".red-box, .blue-box");
+  /*empty() it's going to move everything inside that tag, but it's not going to remove the element itself, it's just going to empty
+  everything inside it.*/
+  // $("p:first").empty();
+
+  /*Mini-challenge. Empty all the boxes whatever color thay have*/
+  $(".red-box, .green-box, .blue-box").empty();
 });
