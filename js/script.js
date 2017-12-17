@@ -19,14 +19,17 @@ $(function() {
   console.log(checkbox.prop("checked", false));
   console.log(checkbox.prop("checked")); /*Here will return false*/
   console.log(checkbox.attr("checked")); /*Here will return checked again*/
+  console.log(checkbox.val()); /*Here will return on*/
+  console.log(checkbox.is(':checked')); /*Here will return true or false*/
 
+  
   var textInput = $("input:text");
   /* console.log(textInput.val()); The val() without parameter you retrieve the value of the input element*/
   textInput.val("Juan Moris"); /*The val() with a parameter you set the input element to a new value*/
-  console.log(textInput.val()); 
+  //console.log(textInput.val()); 
 
   var rangeInput = $("input[type='range']"); /*for range type there's no convenience operator in jQuery*/
-  console.log(rangeInput.val());
+  //console.log(rangeInput.val());
 
   /*Wherever you have multiple elements selected like $("input:text") you may actually select multiple elements so if you have more 
   than one text input on the page then when you call val(), attr() or prop() on that it's always call implicity call the first. So 
