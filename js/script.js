@@ -1,31 +1,23 @@
 $(function() {
   // jQuery goes here...
 
-  /*Changing the CSS Properties of Elements*/
-  $(".gallery").css("display", "none"); //hide()
+  /*Adding or removing CSS Classes*/
+  $("a").addClass("fancy-link"); // This will add a class fancy-link defined in the css file. It's exactly the same that class="..."
+  $("p:first").addClass("large emphasize"); // To add multiple classes
 
-  /*We can retrieve a value of a property by using only the first parameter*/
-  var redBox = $(".red-box");
-  console.log(redBox.css("width")); //This will return the unit like in this case the pixels.
-  console.log(redBox.width()); //This will return the width (numerical value) withou the unit.
+  $("li li").addClass(function(index){
+    $(this).addClass("item-" + index);
+  });
 
-  /*We can set a value property like this*/
-  redBox.css("background-color", "#AA7700");
-  $("p").css("font-size", "18px");
+  $("div").addClass(function(index, currentClass){ //This will look for al the div classes and if it's equal to dummy it will
+    if(currentClass === "dummy"){ // change to a red-box class
+      return "red-box";
+    }
+  });
 
-  redBox.css("width", "+=20px"); // This will increase the element by 20 pixels
+  //$(".red-box").removeClass().addClass("blue-box"); //This will replace the red-box class to a blue-box class.
 
-  var properties = $("p").css(["font-size", "line-height", "color"]); // Select the values of multiple properties
-  console.log(properties); // This will return as an object with a key value pair (Object { font-size: "18px", line-heigth: "21.6px", color: "rgb(0, 0, 0)" })
-  console.log(properties["font-size"]);
-
-  redBox.css("user-select", "none"); //This will make not be selectable the text of the red box
-  redBox.css("user-select", function(){ // You can use a function too
-    return "none";  
-  }); 
-
-  redBox.css("background-color", "#AA7700 !important"); //jQuery will ignore all important declarations, so if you want to use
-  // this you havet use css classes
-
-
+  /*Mini challenge: remove the Dummy class and add the green-box class*/
+  //$(".dummy").removeClass().addClass("green-box");
+  $(".dummy").removeClass("dummy").addClass("green-box"); 
 });
