@@ -1,23 +1,25 @@
 $(function() {
   // jQuery goes here...
 
-  /*Adding or removing CSS Classes*/
-  $("a").addClass("fancy-link"); // This will add a class fancy-link defined in the css file. It's exactly the same that class="..."
-  $("p:first").addClass("large emphasize"); // To add multiple classes
+  /*Changing the Data of an Element*/
+  var gallery = $(".gallery");
 
-  $("li li").addClass(function(index){
-    $(this).addClass("item-" + index);
-  });
+  var images = [
+    "images/laptop-mobile_small.jpg",
+    "images/laptop-on-table_small.jpg",
+    "images/people-office-group-team_small.jpg"
+  ];
 
-  $("div").addClass(function(index, currentClass){ //This will look for al the div classes and if it's equal to dummy it will
-    if(currentClass === "dummy"){ // change to a red-box class
-      return "red-box";
-    }
-  });
+  gallery.data("availableImages", images); // The way to associate data with the element 
+  console.log(gallery.data("availableImages")); // To get the value (it will return the array of images)
 
-  //$(".red-box").removeClass().addClass("blue-box"); //This will replace the red-box class to a blue-box class.
+  gallery.data("name", "The Awesome Gallery");
+  console.log(gallery.data()); // This will return all the data that it's associated with the gallery object
 
-  /*Mini challenge: remove the Dummy class and add the green-box class*/
-  //$(".dummy").removeClass().addClass("green-box");
-  $(".dummy").removeClass("dummy").addClass("green-box"); 
+  gallery.removeData("name");
+  console.log(gallery.data("name")); //This will return undefined because it was already remove
+
+  var firstPar = $("p:first");
+  console.log(firstPar.data("mydata")); //Here we specify the key that we define on the p tag "data-mydata" that it's called data-attributes
+  //and it will show thw value of that key that is "some data here"
 });
