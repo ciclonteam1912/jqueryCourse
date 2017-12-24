@@ -1,14 +1,20 @@
 $(function() {
   // jQuery goes here...
 
-  /*Retrieving and Changing the Content of an Element*/
-  var firstPar = $("p:first");
- // console.log(firstPar.text()); //This will print the actual text of the first paragraph
- // console.log(firstPar.html()) //Here will print all the html tag and also the text of the paragraph
+  /*Adding Click Handlers*/
+  /*$("#btn-click").click(function(){ // On the click function we pass the function that we want to execute once the element is clicked.
+    alert("Button was clicked.");
+  });*/
 
- // firstPar.text("<strong>Hello</strong> World!"); // This will print the tag strong into the page, this will not apply as an html
-  //firstPar.html("<strong>Hello</strong> World!"); // Here we can make any html code inside the html()
+  $("#btn-click").click(function(event){ // The event parameter contain all the information about that event object
+    console.log(event);
+    alert("Button was clicked.");
+  });
 
   /*Mini challenge*/
-  firstPar.html(firstPar.html() + " This was just appended.");
+  $(".red-box").click(function(){
+    $(this).fadeTo(500, 0.5);
+  });
+
+  $(".red-box").click();
 });
