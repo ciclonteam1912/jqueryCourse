@@ -1,21 +1,13 @@
 $(function() {
   // jQuery goes here...
 
-  /*Adding Click Handlers*/
-  /*$("#btn-click").click(function(){ // On the click function we pass the function that we want to execute once the element is clicked.
-    alert("Button was clicked.");
-  });*/
-
-  $("#btn-click").click(function(event){ // The event parameter contain all the information about that event object
-    console.log(event);
-    alert("Button was clicked.");
+  /*Adding Hover Handlers*/
+  $("#btn-hover").hover(function(){ // Here the hover event it's going to get twice because the hover event is going to
+    alert("Button was hovered."); // be fired when i enter that button and again when the mouse leaves that element
   });
 
-  /*Mini challenge*/
-  $(".red-box").click(function(){
-    $(this).fadeTo(500, 0.5);
+  /*Mini challenge: Select the green-box and when that's hovered change the text to "I was hovered!"*/
+  $(".green-box").hover(function(){
+    $(this).text("I was hovered!");
   });
-
-  $(".red-box").click(); // This will trigger the click event on the red-box, and it's going to instantly fade to 50%
-  // as if the element was clicked.
 });
