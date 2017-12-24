@@ -16,5 +16,6 @@ $(function() {
     $(this).fadeTo(500, 0.5);
   });
 
-  $(".red-box").click();
+  $(".red-box").click(); // This will trigger the click event on the red-box, and it's going to instantly fade to 50%
+  // as if the element was clicked.
 });
