@@ -1,10 +1,12 @@
 $(function() {
   // jQuery goes here...
 
-  /*Adding Same Handler for Multiple Events*/
-  $("html").on("click keydown", function(){
+  /*Modularizing Event Handlers (No More Inline Functions)*/
+  function logEvent(){ /*You can put this function inside or outside the document ready of jQuery*/
     console.log("Mouse was clicked or key was pressed.");
-  });
+  }
+
+  $("html").on("click keydown", logEvent);
 
   /*Mini challenge*/
    var images = [
@@ -14,10 +16,13 @@ $(function() {
   ];
 
   var i = 0;
-  $(".gallery").find("img").on("click", function(){
+  var galleryImage = $(".gallery").find("img");
+  galleryImage.on("click", switchToNextImage);
+
+  function switchToNextImage() {
     i = (i + 1) % images.length;
-    $(this).fadeOut(function(){
-      $(this).attr("src", images[i]).fadeIn();
+    galleryImage.fadeOut(function(){
+      galleryImage.attr("src", images[i]).fadeIn();
     });
-  });
+  }
 });
