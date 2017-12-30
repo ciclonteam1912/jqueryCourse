@@ -1,28 +1,42 @@
 $(function() {
   // jQuery goes here...
 
-  /*Modularizing Event Handlers (No More Inline Functions)*/
-  function logEvent(){ /*You can put this function inside or outside the document ready of jQuery*/
-    console.log("Mouse was clicked or key was pressed.");
-  }
+  /*Delegated Events*/
+  /*The problem is that when you call functions like click(), on() or mouseenter(), then those event handlers will only be attached
+  to elements that are already present on the page.
 
-  $("html").on("click keydown", logEvent);
+  So if you add new elements dynamically to the page via prepend(), append(), before() or after(), they will not have any event
+  handlers.
+
+  Example:
+  $("p").click(function(){
+    $(this).slideUp();
+  });
+  $("#content").append("<p>This is dynamically added paragraph.</p>");*/
+  /*This dynamically added paragraph will not have the
+  event handler that we defined fo all p tags on the page*/
+
+  /*The way to solve this is to use Delegate Events. 
+  This means is that you basically define your event handler on some parent element which will always be on the page
+  and the that parent element once that event actually occurs well then delegate that event to be handled by its children 
+  or descendents.
+
+  Example:*/
+  $("#content").on("click", "p", function(){
+    $(this).slideUp(); //this will refer to the paragraph tag that was clicked and it's not going to refer to the parent 
+    //element
+  });
+  $("#content").append("<p>This is dynamically added paragraph.</p>");
+  /*So now the content div is waiting for the events and once it occurs it's going to delegate them to the paragraph tags.*/
 
   /*Mini challenge*/
-   var images = [
-    "images/laptop-mobile_small.jpg",
-    "images/laptop-on-table_small.jpg",
-    "images/people-office-group-team_small.jpg"
-  ];
+  $("body").on("mouseenter", "li", function(){
+      $(this).css("color", "#666");
+  });
 
-  var i = 0;
-  var galleryImage = $(".gallery").find("img");
-  galleryImage.on("click", switchToNextImage);
+  /*The parent is listen to the event and then delegate to its children.
+  Using delegate events can actually increase the performance of your site. For example, if you have a thousand table rows
+  then adding the event of each of those will have a thousand event handlers associated with elements.
 
-  function switchToNextImage() {
-    i = (i + 1) % images.length;
-    galleryImage.fadeOut(function(){
-      galleryImage.attr("src", images[i]).fadeIn();
-    });
-  }
-});
+  So in those cases it's also more efficient to just use delegate events on a parent element*/
+}); 
