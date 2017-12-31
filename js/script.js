@@ -1,26 +1,20 @@
 $(function() {
   // jQuery goes here...
 
-  /*Coding Activity: Creating an Image Gallery with Lightbox Preview*/
-  var galleryItems = $(".gallery").find("img");
-  galleryItems.css("width", "33%").css("opacity", "0.7");
+  /*Handling KeyDown & KeyUp Events*/
 
-  galleryItems.mouseenter(function(){
-    $(this).stop().fadeTo(500, 1);
-  });
-
-  galleryItems.mouseleave(function(){
-    $(this).stop().fadeTo(500, 0.7);
-  });
-
-  galleryItems.click(function(){
-    var source = $(this).attr("src");
-    var image = $("<img>").attr("src", source).css("width", "100%");
-    $(".lightbox").empty().append(image).fadeIn(2000);
+  //keypress() - EVIL! There's no official specification and it's just not cross-browser compatible
+  $("html").keydown(function(event){
+    console.log(event.which); //which it's gonna tell you which key was pressed. This will not work with the keypress() event
   });
 
   /*Mini Challenge*/
-  $(".lightbox").click(function(){
-    $(this).stop().fadeOut();
+  var AROW_RIGHT = 39;
+  $("html").keydown(function(event){
+    if(event.which == AROW_RIGHT){
+      $(".blue-box").stop().animate({
+        marginLeft: "+=10px"
+      }, 50);
+    }
   });
 }); 
