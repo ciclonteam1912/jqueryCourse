@@ -1,19 +1,26 @@
 $(function() {
   // jQuery goes here...
 
-  /*Passing Additional Data to Events*/
-  /*Add additional information or addition data to an event*/
-  $("#btn-click").click({
-    user:  "Juan",
-    domain: "moris_juan@hotmail.com"
-  }, function(event){ //All the data we pass here is going to be bound to event.data
-    greetUser(event.data);
+  /*Coding Activity: Creating an Image Gallery with Lightbox Preview*/
+  var galleryItems = $(".gallery").find("img");
+  galleryItems.css("width", "33%").css("opacity", "0.7");
+
+  galleryItems.mouseenter(function(){
+    $(this).stop().fadeTo(500, 1);
   });
 
-  function greetUser(userdata){
-    username = userdata.user || "Anonymous";
-    domain = userdata.domain || "example.com";
+  galleryItems.mouseleave(function(){
+    $(this).stop().fadeTo(500, 0.7);
+  });
 
-    alert("Welcome back "+ username + " from " + domain + "!");
-  }
+  galleryItems.click(function(){
+    var source = $(this).attr("src");
+    var image = $("<img>").attr("src", source).css("width", "100%");
+    $(".lightbox").empty().append(image).fadeIn(2000);
+  });
+
+  /*Mini Challenge*/
+  $(".lightbox").click(function(){
+    $(this).stop().fadeOut();
+  });
 }); 
