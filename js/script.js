@@ -1,20 +1,25 @@
 $(function() {
   // jQuery goes here...
 
-  /*Handling KeyDown & KeyUp Events*/
-
-  //keypress() - EVIL! There's no official specification and it's just not cross-browser compatible
-  $("html").keydown(function(event){
-    console.log(event.which); //which it's gonna tell you which key was pressed. This will not work with the keypress() event
+  /*The Focus & Blur Events*/
+  // focus() is triggered when you go into a text input, and when you press tab or go into another text input it's going to be blur()
+  var inputFields = $("input:text, input:password, textarea");
+  inputFields.focus(function(){
+    $(this).css("box-shadow", "0 0 4px #666");
+  });
+  /*With this example when i click into one of these elements you're going to get this box-shadow. Here we should also use
+  the blur() event to get rid of the box-shadow again because this way it's just going to stay there forever.*/
+  inputFields.blur(function(){
+    $(this).css("box-shadow", "none");
   });
 
-  /*Mini Challenge*/
-  var AROW_RIGHT = 39;
-  $("html").keydown(function(event){
-    if(event.which == AROW_RIGHT){
-      $(".blue-box").stop().animate({
-        marginLeft: "+=10px"
-      }, 50);
-    }
+  /*Mini challenge*/
+  $("#name").blur(function(){
+    var text = $(this).val();
+    if(text.length < 3){
+     $(this).css("box-shadow", "0 0 4px #811"); 
+   }else{
+    $(this).css("box-shadow", "0 0 4px #181");
+   }
   });
 }); 
