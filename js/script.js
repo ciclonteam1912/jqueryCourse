@@ -1,25 +1,35 @@
 $(function() {
   // jQuery goes here...
 
-  /*The Focus & Blur Events*/
-  // focus() is triggered when you go into a text input, and when you press tab or go into another text input it's going to be blur()
-  var inputFields = $("input:text, input:password, textarea");
-  inputFields.focus(function(){
-    $(this).css("box-shadow", "0 0 4px #666");
+  /*Using the Change Event*/
+  //This is for checkbox elements
+  $("#cb").change(function(){
+    var isChecked = $(this).is(":checked"); //.prop("checked")
+    if(isChecked){
+      $(this).add("label[for='cb']").css("box-shadow", "0 0 4px #181");
+    }else{
+      $(this).add("label[for='cb']").css("box-shadow", "0 0 4px #811");
+    }
   });
-  /*With this example when i click into one of these elements you're going to get this box-shadow. Here we should also use
-  the blur() event to get rid of the box-shadow again because this way it's just going to stay there forever.*/
-  inputFields.blur(function(){
-    $(this).css("box-shadow", "none");
-  });
+  
+  /*Some observations
+  When you select a checkbox, prop("checked") and is(":checked")  do the same thing: they check whether the checkbox is 
+  currently checked. They do not change the checkbox state themselves, they just return true/false to indicate whether it is checked. 
+  I prefer is(":checked")  because I find it more readable (the code reads "if checkbox is checked...")
+
+  In general, jQuery often has two variants of one function:
+
+  1) Function with only one argument to retrieve the value: function foo(element) 
+  2) Function with two arguments to set the value: function foo(element, value) 
+
+  This is the case for attr(), prop(), text(), html() and so on.
+  */
+
 
   /*Mini challenge*/
-  $("#name").blur(function(){
-    var text = $(this).val();
-    if(text.length < 3){
-     $(this).css("box-shadow", "0 0 4px #811"); 
-   }else{
-    $(this).css("box-shadow", "0 0 4px #181");
-   }
+  //This is for selected elements
+  $("#selection").change(function(){
+    var selectedOption = $(this).find(":selected").text();  //This is going to get all the selected elements
+    alert(selectedOption);
   });
 }); 
