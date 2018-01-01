@@ -1,35 +1,29 @@
 $(function() {
   // jQuery goes here...
 
-  /*Using the Change Event*/
-  //This is for checkbox elements
-  $("#cb").change(function(){
-    var isChecked = $(this).is(":checked"); //.prop("checked")
-    if(isChecked){
-      $(this).add("label[for='cb']").css("box-shadow", "0 0 4px #181");
-    }else{
-      $(this).add("label[for='cb']").css("box-shadow", "0 0 4px #811");
+  /*Handling the Submit Event*/
+  /*The submit() event it's very useful to perform some final validation where you can go through all the elements
+  on the page and see if everything's fine before actually sending that form data to your server.
+
+  So this prevents unnecessary operations on the server, it laso prevents the use of waiting, it prevents the page reload
+  and it just provides a better user experience because the user knows right away what's going wrong.*/
+  $("#form").submit(function(event){
+    var textarea = $("#message");
+    if(textarea.val().trim() == ""){
+      textarea.css("box-shadow", "0 0 4px #811");
+      event.preventDefault();
+    } else{
+      //form will be submitted
     }
   });
-  
-  /*Some observations
-  When you select a checkbox, prop("checked") and is(":checked")  do the same thing: they check whether the checkbox is 
-  currently checked. They do not change the checkbox state themselves, they just return true/false to indicate whether it is checked. 
-  I prefer is(":checked")  because I find it more readable (the code reads "if checkbox is checked...")
 
-  In general, jQuery often has two variants of one function:
+  /*Observation:
 
-  1) Function with only one argument to retrieve the value: function foo(element) 
-  2) Function with two arguments to set the value: function foo(element, value) 
+  The event object is useful to control the event that happened, here the form submission.
+  Without access to the event object, we wouldn't be able to prevent the form from submitting because done 
+  using event.preventDefault(). As the name implies, that function prevents the default action that 
+  normally occurs with the event -- e.g. form submission.
 
-  This is the case for attr(), prop(), text(), html() and so on.
-  */
-
-
-  /*Mini challenge*/
-  //This is for selected elements
-  $("#selection").change(function(){
-    var selectedOption = $(this).find(":selected").text();  //This is going to get all the selected elements
-    alert(selectedOption);
-  });
+  Another common example is when you handle the click on a link in JS, you can use event.preventDefault()  
+  to stop the link from actually taking the user to the linked page.*/
 }); 
